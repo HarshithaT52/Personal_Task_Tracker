@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/736x/c0/36/be/c036beeec2766bae0b62652e87d51227.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+    }
+
+    .high-priority {
+      border-left: 5px solid rgb(218, 11, 11);
+      padding-left: 10px;
+    }
+    .medium-priority {
+      border-left: 5px solid rgb(243, 214, 0);
+      padding-left: 10px;
+    }
+    .low-priority {
+      border-left: 5px solid rgb(97, 97, 213);
+      padding-left: 10px;
+    }
+    .completed-task {
+      text-decoration: line-through;
+      background-color: #d3f9d8; 
+    }
+    .pending-task {
+      background-color: #f8d7da; 
+    }
+
+    #add-task-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #add-task-button:hover {
+      background-color: #28a745;
+      transform: scale(1.05);  
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow */
+    }
+
+    #add-task-button:focus {
+      outline: none;
+      box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.8); /* Blue glow on focus */
+    }
+
+    #priority-tip {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+      text-align: center;
+    }
+    #priority-tip .priority-box {
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      margin: 0 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Personal Task Tracker</h1>
+
+    <div class="mb-4 p-3 border rounded">
+      <h4>Today's Summary</h4>
+      <p>Total Tasks: <span id="total-tasks">0</span></p>
+      <p>Completed Tasks: <span id="completed-tasks">0</span></p>
+      <p>Pending Tasks: <span id="pending-tasks">0</span></p>
+    </div>
+
+    <div class="mb-4">
+      <h4>Add New Task</h4>
+      <form id="task-form" class="row g-3">
+        <div class="col-md-6">
+          <input type="text" id="task-name" class="form-control" placeholder="Task Name" required>
+        </div>
+        <div class="col-md-3">
+          <select id="task-priority" class="form-select" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <input type="date" id="task-date" class="form-control" required>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" id="add-task-button" class="btn w-100">Add Task</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mb-4">
+      <h4>Filter Tasks</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <input type="date" id="filter-date" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <select id="filter-status" class="form-select">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <select id="filter-priority" class="form-select">
+            <option value="all">All Priorities</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="task-list" class="list-group">
+    </div>
+  </div>
+
+  <div id="no-tasks-message" class="alert alert-warning text-center" style="display: none;">
+    No tasks found for the selected filters.
+  </div>
+
+  <div id="priority-tip">
+    <h5>Task Priority Colors:</h5>
+    <p>
+      <span class="priority-box" style="background-color: rgb(97, 97, 213);"></span> <strong>Low Priority</strong><br>
+      <span class="priority-box" style="background-color: rgb(243, 214, 0);"></span> <strong>Medium Priority</strong><br>
+      <span class="priority-box" style="background-color: rgb(218, 11, 11);"></span> <strong>High Priority</strong>
+    </p>
+  </div>
+
+  <script src="app.js"></script>
+ 
+</body>
+</html>
